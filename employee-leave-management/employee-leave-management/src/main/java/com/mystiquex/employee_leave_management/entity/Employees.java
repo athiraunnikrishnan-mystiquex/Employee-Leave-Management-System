@@ -32,7 +32,7 @@ public class Employees {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "employeeStatus")
+    @Column(name = "status")
     private String employeeStatus;
 
     @Column(name = "date_of_joining", nullable = false)

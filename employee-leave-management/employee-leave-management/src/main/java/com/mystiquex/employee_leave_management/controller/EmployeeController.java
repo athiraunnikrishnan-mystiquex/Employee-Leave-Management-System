@@ -27,17 +27,20 @@ public class EmployeeController {
 
     private final EmployeeService employeeService;
 
+    //Add Employee details to employee table
     @PostMapping("/add")
     public ResponseEntity<?> createEmployee(@Valid @RequestBody EmployeesDto employeesDto){
         employeeService.createEmployee(employeesDto);
         return ResponseEntity.ok("Employee Saved Successfully");
     }
 
-    @GetMapping("/{employeeId}")
+    //Fetch Employee details using employeeId
+    @GetMapping("/fetch/{employeeId}")
     public Employees getEmployeeById(@PathVariable UUID employeeId){
         return employeeService.getEmployeeById(employeeId);
     }
 
+    //Filter the employees based status, joined date
     @GetMapping("/filter")
     public ResponseEntity<List<Employees>> getEmployeesByFilter(
             @RequestParam(required = false) String employeeStatus,
@@ -48,19 +51,22 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.getEmployeesByFilter(employeeStatus, joinedAfter, joinedBefore, page, size));
     }
 
-    @PutMapping("/{employeeId}")
+    //Update employee details using employeeId
+    @PutMapping("/{employeeId}/update")
     public ResponseEntity<?> updateEmployeeDetails(@PathVariable UUID employeeId, @RequestBody EmployeesDto employeesDto){
          employeeService.updateEmployeeDetails(employeeId, employeesDto);
          return ResponseEntity.ok("Employee Details Changed Successfully");
     }
 
-    @DeleteMapping("/{employeeId}")
+    //Change the employee status Active to Inactive(Soft Delete)
+    @DeleteMapping("/delete/{employeeId}")
     public ResponseEntity<?> EmployeeActiveToInactive(@PathVariable UUID employeeId){
          employeeService.EmployeeActiveToInactive(employeeId);
         return ResponseEntity.ok("Employee Deleted Successfully");
     }
 
-    @GetMapping("")
+    //Fetch All the employee
+    @GetMapping("/employees")
     public List<Employees> getAllEmployee(){
         return employeeService.getAllEmployee();
     }

@@ -12,7 +12,7 @@ import java.util.UUID;
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employees, UUID> {
 
-    @Query(value = "SELECT e from Employees e WHERE e.id = :id AND e.employeeStatus= 'ACTIVE'")
-    Optional<Employees> findEmployeeByIdAndActive(@Param("id") UUID id);
+    @Query(value = "SELECT e from Employees e WHERE e.employeeId = :employeeId AND e.employeeStatus= 'ACTIVE'")
+    Optional<Employees> findEmployeeByIdAndActive(@Param("employeeId") UUID employeeId);
 
 }
